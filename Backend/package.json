@@ -1,0 +1,31 @@
+{
+  "name": "tasks",
+  "version": "1.0.0",
+  "description": "Backend básico de lista de tareas.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "ts-node-dev src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AbrilSabatini/forit-task.git"
+  },
+  "author": "AbrilSabatini",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AbrilSabatini/forit-task/issues"
+  },
+  "homepage": "https://github.com/AbrilSabatini/forit-task#readme",
+  "dependencies": {
+    "express": "5.1.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.3",
+    "@types/node": "^24.0.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  }
+}
