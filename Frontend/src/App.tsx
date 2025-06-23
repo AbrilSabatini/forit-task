@@ -45,10 +45,11 @@ function App() {
   return (
     <BrowserRouter>
      <header className="p-4 bg-gray-100">
-        <Link to="/tasks/form" className="btn btn-primary">
-          Nueva tarea
-        </Link>
       </header>
+
+      <Link to="/tasks/form" className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 size-12 sm:size-16 bg-green-500 flex items-center justify-center rounded-full hover:scale-110 transition-transform text-white font-bold text-3xl sm:text-5xl shadow-lg">
+        +
+      </Link>
       
       <main className="p-4">
         <Routes>
