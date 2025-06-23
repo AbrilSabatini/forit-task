@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import TaskService from "../services/taskService";
+import TaskService from "../services/TaskService";
 import type { Task, TaskArray } from "../types";
 
 type TaskFormData = Omit<Task, "id" | "createdAt">;
