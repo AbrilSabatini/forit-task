@@ -7,3 +7,5 @@ export interface Task {
 }
 
 export type TaskArray = Task[];
+
+export type TaskFormData = Omit<Task, "id" | "createdAt">;

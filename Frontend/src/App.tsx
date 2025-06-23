@@ -1,37 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Error404 from "./components/Error404";
 import { TaskForm } from "./components/TaskForm";
 import TaskItem from "./components/TaskItem";
 import TaskList from "./components/TaskList";
-import { type Task } from "./types";
+import TaskService from "./services/TaskService";
+import { type TaskArray, type TaskFormData } from "./types";
 
-const mockTasks = [
-  { id: 1, title: 'Learn React', description: 'Study the React docs', completed: false, createdAt: new Date() },
-  { id: 2, title: 'Build a Todo App', description: 'Create a simple app', completed: false, createdAt: new Date() },
-  { id: 3, title: 'Deploy the App', description: 'Deploy it somewhere', completed: true, createdAt: new Date() }
-];
 
 function App() {
-  const [tasks, setTasks] = useState(mockTasks);
+  const [tasks, setTasks] = useState<TaskArray>([]);
+  const taskService = new TaskService();
 
-  const handleRemoveTask = (id: number) => {
+  useEffect(() => {
+    taskService.getAll().then(setTasks)
+    .catch(error => console.error("Error loading tasks:", error));
+  }, []);
+
+  const handleRemoveTask = async (id: number) => {
+    await taskService.delete(id);
     setTasks(tasks.filter(task => task.id !== id))
   };
 
-  const handleCompleteTask = (id: number) => {
-    setTasks(tasks.map(task =>
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+  const handleCompleteTask = async (id: number) => {
+  
+    const updated = await taskService.update(id, { completed: !tasks.find(task => task.id === id)?.completed });
+    setTasks(prec => prec.map(task => task.id === id ? updated : task))
   };
 
-  const handleAddTask = (task: Task) => {
-  setTasks( prev => [...prev, task])
+  const handleAddTask = async (task: TaskFormData) => {
+    const newTask = await taskService.create(task)
+  setTasks( prev => [...prev, newTask])
   };
 
-  const handleEditTask = (updatedTask: Task) => {
+  const handleEditTask = async (updatedTask: TaskFormData, id?: number) => {
+    if(!id) return
+    const updated = await taskService.update(id, updatedTask)
     setTasks(prev =>
-      prev.map(task => task.id === updatedTask.id ? updatedTask : task)
+      prev.map(task => task.id === updated.id ? updated : task)
     );
   };
 

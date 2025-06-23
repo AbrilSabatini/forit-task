@@ -1,16 +1,14 @@
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import TaskService from "../services/TaskService";
-import type { Task, TaskArray } from "../types";
+import type { TaskArray, TaskFormData } from "../types";
 
-type TaskFormData = Omit<Task, "id" | "createdAt">;
+
 
 type Props = {
   tasks: TaskArray
-  onSubmit: () => void
+  onSubmit: (data: TaskFormData, id?: number) => Promise<void>
 };
 
-const taskService = new TaskService();
 
 export const TaskForm: React.FC<Props> = ({ tasks, onSubmit }) => {
   const { id } = useParams()
@@ -26,15 +24,14 @@ export const TaskForm: React.FC<Props> = ({ tasks, onSubmit }) => {
   const handleSubmitForm = async (data: TaskFormData) => {
     try {
       if (editar && taskToEdit) {
-        await taskService.update(taskToEdit.id, {...data, id: taskToEdit.id});
+        await onSubmit(data, taskToEdit.id)
       } else {
-        await taskService.create(data);
+        await onSubmit(data)
       }
-      onSubmit()
-      navigate("/")
+      navigate("/");
     } catch (error) {
-      alert("Error al guardar tarea");
-      console.error(error);
+      alert("Error al guardar tarea")
+      console.error(error)
     }
   };
 

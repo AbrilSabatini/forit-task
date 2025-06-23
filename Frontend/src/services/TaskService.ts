@@ -26,7 +26,7 @@ export default class TaskService {
     return await response.json();
   }
 
-  async update(id: number, task: Omit<Task, "createdAt">): Promise<Task> {
+  async update(id: number, task: Partial<Task>): Promise<Task> {
     const response = await fetch(`${API_URL}/tasks/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
