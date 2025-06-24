@@ -25,7 +25,7 @@ export const Task: React.FC<Props> = ({ task, onRemoveTask, onToggleComplete }) 
         <p className="truncate w-full overflow-hidden whitespace-nowrap">{task.description}</p>
       </div>
 
-      <div className="mt-2 flex justify-end gap-2">
+      <div className="mt-2 flex justify-end gap-4">
         <button
           className="text-red-500 hover:underline text-sm cursor-pointer"
           onClick={() => onRemoveTask(task.id)}

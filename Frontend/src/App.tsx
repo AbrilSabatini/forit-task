@@ -28,7 +28,7 @@ function App() {
   
     const updated = await taskService.update(id, { completed: !tasks.find(task => task.id === id)?.completed });
     setTasks(prec => prec.map(task => task.id === id ? updated : task))
-    toast.success("Tarea completada");
+    if (updated.completed === true) { toast.success("Tarea completada") };
   };
 
   const handleAddTask = async (task: TaskFormData) => {
@@ -48,13 +48,13 @@ function App() {
   return (
     <BrowserRouter>
       <header className="p-4 bg-gray-100 flex justify-center">
-        <h2>AppTasks</h2>
+        <h2 className="text-2xl font-bold text-gray-800 tracking-wide">AppTasks</h2>
       </header>
 
       <Toaster
         position="bottom-left"
         toastOptions={{
-          className: "text-sm rounded-lg px-4 py-2",
+          className: "text-6x1 rounded-lg px-4 py-2",
           duration: 3000,
           style: {
             borderRadius: '10px',
@@ -64,7 +64,16 @@ function App() {
         }}
       />
       <Link to="/tasks/form" className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 size-12 sm:size-16 bg-green-500 flex items-center justify-center rounded-full hover:scale-110 transition-transform text-white font-bold text-3xl sm:text-5xl shadow-lg">
-        +
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="w-6 h-6 sm:w-8 sm:h-8"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+        </svg>
       </Link>
       
       <main className="p-4">

@@ -39,58 +39,61 @@ export const TaskForm: React.FC<Props> = ({ tasks, onSubmit }) => {
 
   return (
     <div className="flex items-center justify-center min-h-[calc(100vh-64px)] px-4 bg-gray-50">
-      <form onSubmit={handleSubmit(handleSubmitForm)} className="p-4 space-y-4 max-w-md w-full bg-white rounded shadow">
-        <div>
-          <label className="block font-semibold mb-1">Título</label>
-          <input
-            className="block w-full border p-2 rounded"
-            type="text"
-            {...register("title", { required: true, minLength: 3, maxLength:50 })}
-          />
-          {errors.title && (
-            <p className="text-red-500 text-sm">
-              {errors.title.type === "required" && "Ingresa un título"}
-              {errors.title.type === "minLength" && "Mínimo 3 caracteres"}
-              {errors.title.type === "maxLength" && "Máximo 50 caracteres"}
-            </p>
-          )}
-        </div>
+     <div className="max-w-md w-full bg-white p-6 rounded shadow">
+        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">{editar ? "Actualizar" : "Agregar"} tarea</h2>
+        <form onSubmit={handleSubmit(handleSubmitForm)} className="p-4 space-y-4 max-w-md w-full">
+          <div>
+            <label className="block font-semibold mb-1">Título</label>
+            <input
+              className="block w-full border p-2 rounded"
+              type="text"
+              {...register("title", { required: true, minLength: 3, maxLength:50 })}
+            />
+            {errors.title && (
+              <p className="text-red-500 text-sm">
+                {errors.title.type === "required" && "Ingresa un título"}
+                {errors.title.type === "minLength" && "Mínimo 3 caracteres"}
+                {errors.title.type === "maxLength" && "Máximo 50 caracteres"}
+              </p>
+            )}
+          </div>
 
-        <div>
-          <label className="block font-semibold mb-1">Descripción</label>
-          <textarea
-            className="block w-full border p-2 rounded"
-            {...register("description", { required: true, minLength: 3, maxLength: 500 })}
-          />
-          {errors.description && (
-            <p className="text-red-500 text-sm">
-              {errors.description.type === "required" && "Ingresa una descripción"}
-              {errors.description.type === "minLength" && "Mínimo 3 caracteres"}
-              {errors.description.type === "maxLength" && "Máximo 500 caracteres"}
-            </p>
-          )}
-        </div>
+          <div>
+            <label className="block font-semibold mb-1">Descripción</label>
+            <textarea
+              className="block w-full border p-2 rounded"
+              {...register("description", { required: true, minLength: 3, maxLength: 500 })}
+            />
+            {errors.description && (
+              <p className="text-red-500 text-sm">
+                {errors.description.type === "required" && "Ingresa una descripción"}
+                {errors.description.type === "minLength" && "Mínimo 3 caracteres"}
+                {errors.description.type === "maxLength" && "Máximo 500 caracteres"}
+              </p>
+            )}
+          </div>
 
-        <div>
-          <label className="inline-flex items-center">
-            <input type="checkbox" className="mr-2" {...register("completed")} />
-            Completado
-          </label>
-        </div>
+          <div>
+            <label className="inline-flex items-center">
+              <input type="checkbox" className="mr-2" {...register("completed")} />
+              Completado
+            </label>
+          </div>
 
-        <div className="flex justify-end gap-2">
-          <button type="submit" className="bg-blue-400 hover:bg-blue-600 text-white px-4 py-2 rounded">
-            {editar ? "Actualizar" : "Agregar"} tarea
-          </button>
-          <button
-            type="button"
-            className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
-            onClick={() => editar && taskToEdit ? navigate(`/tasks/${taskToEdit.id}`) : navigate("/")}
-          >
-            Cancelar
-          </button>
-        </div>
-      </form>
+          <div className="flex justify-end gap-2">
+            <button type="submit" className="bg-blue-400 hover:bg-blue-600 text-white px-4 py-2 rounded">
+              {editar ? "Actualizar" : "Agregar"} tarea
+            </button>
+            <button
+              type="button"
+              className="bg-gray-300 text-black px-4 py-2 rounded hover:bg-gray-400"
+              onClick={() => editar && taskToEdit ? navigate(`/tasks/${taskToEdit.id}`) : navigate("/")}
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };

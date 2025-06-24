@@ -27,6 +27,15 @@ const TaskItem: React.FC<Props> = ({ tasks, onRemoveTask }) => {
         onClick={() => navigate("/")}
         className="absolute top-4 left-4 sm:top-6 sm:left-6 bg-gray-200 hover:bg-gray-300 text-black px-3 py-1 rounded-full flex items-center gap-1 text-sm shadow transition cursor-pointer"
       >
+        <svg
+          className="w-4 h-4"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth={2}
+          viewBox="0 0 24 24"
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
         Volver
       </button>
       <div className="bg-white p-6 rounded-xl shadow-md w-full max-w-md">
