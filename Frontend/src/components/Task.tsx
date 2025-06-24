@@ -21,7 +21,7 @@ export const Task: React.FC<Props> = ({ task, onRemoveTask, onToggleComplete }) 
       </div>
 
       <div className=" flex flex-col justify-center items-center text-center" >
-        <h2 className="sm:text-3xl font-semibold">{task.title}</h2>
+        <h2 className="sm:text-2xl font-semibold">{task.title}</h2>
         <p className="truncate w-full overflow-hidden whitespace-nowrap">{task.description}</p>
       </div>
 
