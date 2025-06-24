@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Toaster, toast } from "react-hot-toast";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 import Error404 from "./components/Error404";
 import { TaskForm } from "./components/TaskForm";
@@ -20,12 +21,14 @@ function App() {
   const handleRemoveTask = async (id: number) => {
     await taskService.delete(id);
     setTasks(tasks.filter(task => task.id !== id))
+    toast("Tarea eliminada", {icon: "🗑️"});
   };
 
   const handleCompleteTask = async (id: number) => {
   
     const updated = await taskService.update(id, { completed: !tasks.find(task => task.id === id)?.completed });
     setTasks(prec => prec.map(task => task.id === id ? updated : task))
+    toast.success("Tarea completada");
   };
 
   const handleAddTask = async (task: TaskFormData) => {
@@ -44,9 +47,22 @@ function App() {
 
   return (
     <BrowserRouter>
-     <header className="p-4 bg-gray-100">
+      <header className="p-4 bg-gray-100 flex justify-center">
+        <h2>AppTasks</h2>
       </header>
 
+      <Toaster
+        position="bottom-left"
+        toastOptions={{
+          className: "text-sm rounded-lg px-4 py-2",
+          duration: 3000,
+          style: {
+            borderRadius: '10px',
+            background: "#f5f0f0",
+            color: "#333",
+          },
+        }}
+      />
       <Link to="/tasks/form" className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 size-12 sm:size-16 bg-green-500 flex items-center justify-center rounded-full hover:scale-110 transition-transform text-white font-bold text-3xl sm:text-5xl shadow-lg">
         +
       </Link>

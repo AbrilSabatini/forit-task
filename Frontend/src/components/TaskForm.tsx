@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import type { TaskArray, TaskFormData } from "../types";
-
-
 
 type Props = {
   tasks: TaskArray
@@ -25,10 +24,13 @@ export const TaskForm: React.FC<Props> = ({ tasks, onSubmit }) => {
     try {
       if (editar && taskToEdit) {
         await onSubmit(data, taskToEdit.id)
+        toast.success("Tarea actualizada");
+        navigate(`/tasks/${taskToEdit.id}`);
       } else {
         await onSubmit(data)
+        toast.success("Tarea creada");
+        navigate("/");
       }
-      navigate("/");
     } catch (error) {
       alert("Error al guardar tarea")
       console.error(error)
