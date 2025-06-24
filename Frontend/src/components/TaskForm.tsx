@@ -43,13 +43,13 @@ export const TaskForm: React.FC<Props> = ({ tasks, onSubmit }) => {
           <input
             className="block w-full border p-2 rounded"
             type="text"
-            {...register("title", { required: true, minLength: 3, maxLength: 20 })}
+            {...register("title", { required: true, minLength: 3, maxLength:50 })}
           />
           {errors.title && (
             <p className="text-red-500 text-sm">
               {errors.title.type === "required" && "Ingresa un título"}
               {errors.title.type === "minLength" && "Mínimo 3 caracteres"}
-              {errors.title.type === "maxLength" && "Máximo 20 caracteres"}
+              {errors.title.type === "maxLength" && "Máximo 50 caracteres"}
             </p>
           )}
         </div>
@@ -58,13 +58,13 @@ export const TaskForm: React.FC<Props> = ({ tasks, onSubmit }) => {
           <label className="block font-semibold mb-1">Descripción</label>
           <textarea
             className="block w-full border p-2 rounded"
-            {...register("description", { required: true, minLength: 3, maxLength: 100 })}
+            {...register("description", { required: true, minLength: 3, maxLength: 500 })}
           />
           {errors.description && (
             <p className="text-red-500 text-sm">
               {errors.description.type === "required" && "Ingresa una descripción"}
               {errors.description.type === "minLength" && "Mínimo 3 caracteres"}
-              {errors.description.type === "maxLength" && "Máximo 100 caracteres"}
+              {errors.description.type === "maxLength" && "Máximo 500 caracteres"}
             </p>
           )}
         </div>

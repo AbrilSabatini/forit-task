@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from "express";
+import { NextFunction, Request, Response } from "express";
 
 export const validateBodyTask = (isPartial: boolean = false) => {
   return (req: Request, res: Response, next: NextFunction): void => {
@@ -10,8 +10,8 @@ export const validateBodyTask = (isPartial: boolean = false) => {
     } else if (req.body.title !== undefined) {
       if (typeof req.body.title !== "string") {
         errorMessages.push("Title must be a string");
-      } else if (req.body.title.length < 3 || req.body.title.length > 20) {
-        errorMessages.push("Title must be between 3 and 20 characters long");
+      } else if (req.body.title.length < 3 || req.body.title.length > 50) {
+        errorMessages.push("Title must be between 3 and 50 characters long");
       }
     }
 
@@ -22,10 +22,10 @@ export const validateBodyTask = (isPartial: boolean = false) => {
         errorMessages.push("Description must be a string");
       } else if (
         req.body.description.length < 3 ||
-        req.body.description.length > 100
+        req.body.description.length > 500
       ) {
         errorMessages.push(
-          "Description must be between 3 and 100 characters long"
+          "Description must be between 3 and 500 characters long"
         );
       }
     }
