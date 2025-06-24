@@ -1,9 +1,30 @@
-import { Task } from "../interfaces/Task";
 import { CreateTaskDto } from "../interfaces/CreateTaskDto";
+import { Task } from "../interfaces/Task";
 
 export default class TaskService {
   private tasks: Task[] = [];
   private currentId = 1;
+
+  constructor() {
+    if (process.env.SEED_DATA === "true") {
+      this.tasks = [
+        {
+          id: this.currentId++,
+          title: "Aprender TypeScript",
+          description: "Estudiar los conceptos básicos y tipos.",
+          completed: false,
+          createdAt: new Date(),
+        },
+        {
+          id: this.currentId++,
+          title: "Practicar Express",
+          description: "Hacer rutas y middlewares.",
+          completed: true,
+          createdAt: new Date(),
+        },
+      ];
+    }
+  }
 
   getAll(): Task[] {
     return this.tasks;
